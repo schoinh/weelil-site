@@ -1,0 +1,37 @@
+{
+  "name": "weelil-site",
+  "version": "1.0.0",
+  "description": "A URL shortener",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "buid": "webpack --mode development",
+    "start": "npm run build; webpack-dev-server --open --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schoinh/weelil-site.git"
+  },
+  "author": "Na Hyung Choi",
+  "license": "AGPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/schoinh/weelil-site/issues"
+  },
+  "homepage": "https://github.com/schoinh/weelil-site#readme",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.5.0",
+    "popper.js": "^1.16.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.5.3",
+    "html-webpack-plugin": "^4.2.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
