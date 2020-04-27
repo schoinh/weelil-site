@@ -1,36 +1,65 @@
 const AWS = require('aws-sdk');
+const documentClient = new AWS.DynamoDB.DocumentClient();
 // const crypto = require('crypto');
 
 exports.handler = async (event) => {
-  const documentClient = new AWS.DynamoDB.DocumentClient();
-
-  let longUrl = '';
   let params = {};
   let responseBody = '';
   let statusCode = 0;
+  
+  /*
+  createEvent = {
+    'operation': 'create',
+    'longUrl': 'nahyungchoi.com'
+  }
 
-  // Write to database
+  readEvent = {
+    'operation': 'read',
+    'shortUrlSlug': '54321'
+  }
+  */
 
-  if (event.body) {
-    longUrl = event.body.longUrl;
-    params = {
-      TableName: 'urls',
-      Item: {
-        // shortUrlSlug: crypto.randomBytes(6).toString('hex')
-        shortUrlSlug: '54321',
-        longUrl: longUrl, // TODO: Clean up https:// or http:// and/or www. in frontend
-      }
-    }
-
-    try {
+  switch (event.operation) {
+    case 'create':
       // TODO: First check to see if URL already exists
-      const data = await documentClient.put(params).promise();
-      responseBody = JSON.stringify(data);
-      statusCode = 201;
-    } catch (err) {
-      responseBody = 'Unable to shorten URL';
-      statusCode = 403;
-    }
+      params = {
+        TableName: 'urls',
+        Item: {
+          // shortUrlSlug: crypto.randomBytes(6).toString('hex');
+          shortUrlSlug: '54321',
+          longUrl: event.longUrl, // TODO: Clean up https:// or http:// and/or www. in frontend
+        }
+      }
+      try {
+        const data = await documentClient.put(params).promise();
+        responseBody = JSON.stringify(data); // FIXME: data should contain something
+        statusCode = 201;
+      } catch (err) {
+        responseBody = 'Unable to shorten URL';
+        statusCode = 403;
+      }
+      break;
+
+    case 'read':
+      params = {
+        TableName: 'urls',
+        Key: {
+          shortUrlSlug: event.shortUrlSlug
+        }
+      }
+      try {
+        const data = await documentClient.get(params).promise();
+        responseBody = data.Item.longUrl;
+        statusCode = 200;
+      } catch (err) {
+        responseBody = 'Unable to retrieve original URL';
+        statusCode = 404;
+      }
+      break;
+
+    default:
+      responseBody = 'Invalid operation'
+      statusCode = 400;
   }
 
   const response = {
@@ -43,4 +72,4 @@ exports.handler = async (event) => {
   };
 
   return response;
-};
+}
