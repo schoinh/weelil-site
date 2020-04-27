@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
@@ -15,7 +15,7 @@ module.exports = {
   },
   plugins: [
     new UglifyJsPlugin({ sourceMap: true }),
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Weelil Site',
       template: './src/index.html',
@@ -36,11 +36,7 @@ module.exports = {
         exclude: [
           /node_modules/,
           /spec/
-        ],
-        loader: "babel-loader",
-        options: {
-          presets: ['es2015']
-        }
+        ]
       }
     ]
   }
