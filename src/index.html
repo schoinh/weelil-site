@@ -7,13 +7,24 @@
     <div class="container">
       <div id="title">Weelil Site</div>
       <p class="lead">
-        Take your long URL and make it little.<br>
-        https://reallylongwebsite.com/itsnotoveryet/really/167345efadffa -> https://weelil.site/abc123
+        Take your long URL...<br>
+        <span class="url-line">http://<span class="url" id="long-url">www.reallylongwebsiteurl.com/itsnotoveryet/really/167345efadffa</span></span><br>
+        ...and make it little.<br>
+        <span class="url-line">http://<span class="url" id="short-url">weelil.site/abc123</span></span>
       </p>
       <form>
-        <input class="form-control form-control-lg" type="text" placeholder="Enter a URL to shorten"><br>
-        <button type="submit" class="btn btn-primary">Shorten My URL</button>
+        <div class="form-row">
+          <div class="col-md-10">
+            <input class="form-control form-control-lg" type="text" placeholder="Enter a URL to shorten"><br>
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-lg">Weelil It</button>
+          </div>
+        </div>
       </form>
+      <div id="github">
+        Weelil Site on <a href="http://github.com/schoinh/weelil-site" target="_blank"><img id="github-logo" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Logo.png"/></a>
+      </div>
     </div>
   </body>
 </html>

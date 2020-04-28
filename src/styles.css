@@ -1,12 +1,87 @@
-.container {
-  margin-top: 10rem;
-  text-align: center;
+body {
+  background-color: #e7e6e1;
 }
 
-.lead {
-  margin-bottom: 5rem;
+.container {
+  margin-top: 5rem;
+  text-align: center;
 }
 
 #title {
   font-size: 7rem;
+  font-family: menlo;
+  font-weight: bold;
+  color: #537791;
+  margin: 3rem;
 }
+
+.lead {
+  margin-bottom: 5rem;
+  color: #537791;
+  font-size: 1.5em;
+}
+
+.url-line {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 0.5em;
+  font-family: menlo;
+  font-size: 0.9rem;
+  color: #7c0724;
+}
+
+.url {
+  background-color: #f7f6e7;
+  border: 1px solid #d4a996;
+  border-radius: 0.3em;
+  padding: 5px;
+}
+
+#long-url {
+  width: 43em;
+}
+
+#short-url {
+  width: 17em;
+}
+
+input {
+  font-family: menlo;
+}
+
+button {
+  color: #537791 !important;
+  background-color: #c1c0b9 !important;
+  font-family: menlo;
+  width: 10em;
+}
+
+button:hover {
+  background-color: #a7a7a7 !important;
+}
+
+#github-logo {
+  width: 75px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+#github {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5em;
+  margin-bottom: 5rem;
+  width: 130px;
+  text-align: center;
+  border: 1px;
+  border-style: solid;
+  border-color: lightgray;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: white;
+};
