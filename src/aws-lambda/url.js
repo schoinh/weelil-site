@@ -6,6 +6,8 @@ exports.handler = async (event) => {
   let params = {};
   let statusCode = 0;
   let responseBody = '';
+  const body = JSON.parse(event.body);
+  const { operation } = body;
   
   /*
   createEvent = {
@@ -19,7 +21,7 @@ exports.handler = async (event) => {
   }
   */
 
-  switch (event.operation) {
+  switch (operation) {
     case 'create':
       // TODO: First check if slug already exists
       let shortUrlSlug = crypto.randomBytes(3).toString('hex'); 
@@ -27,7 +29,7 @@ exports.handler = async (event) => {
         TableName: 'urls',
         Item: {
           shortUrlSlug: shortUrlSlug,
-          longUrl: event.longUrl, // TODO: Clean up https:// or http:// and/or www. in frontend
+          longUrl: body.longUrl, // TODO: Clean up https:// or http:// and/or www. in frontend
         }
       }
       try {
@@ -44,7 +46,7 @@ exports.handler = async (event) => {
       params = {
         TableName: 'urls',
         Key: {
-          shortUrlSlug: event.shortUrlSlug
+          shortUrlSlug: body.shortUrlSlug
         }
       }
       try {
@@ -59,14 +61,14 @@ exports.handler = async (event) => {
 
     default:
       statusCode = 400;
-      responseBody = 'Invalid operation'
+      responseBody = 'Invalid operation. Request event: ' + JSON.stringify(event);
   }
 
   const response = {
       statusCode: statusCode,
       headers: {
         'Content-Type': 'application/json',
-        'access-control-allow-origin': '*'
+        'Access-Control-Allow-Origin': '*'
       },
       body: responseBody
   };
