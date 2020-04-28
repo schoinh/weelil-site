@@ -21,18 +21,19 @@ exports.handler = async (event) => {
 
   switch (event.operation) {
     case 'create':
-      // TODO: First check to see if URL already exists
+      // TODO: First check if slug already exists
+      let shortUrlSlug = crypto.randomBytes(3).toString('hex'); 
       params = {
         TableName: 'urls',
         Item: {
-          shortUrlSlug: crypto.randomBytes(3).toString('hex'),
+          shortUrlSlug: shortUrlSlug,
           longUrl: event.longUrl, // TODO: Clean up https:// or http:// and/or www. in frontend
         }
       }
       try {
         await documentClient.put(params).promise();
         statusCode = 201;
-        responseBody = params.Item.shortUrlSlug;
+        responseBody = shortUrlSlug;
       } catch (err) {
         statusCode = 403;
         responseBody = 'Unable to shorten URL';
