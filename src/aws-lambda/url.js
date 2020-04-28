@@ -35,7 +35,7 @@ exports.handler = async (event) => {
       try {
         await documentClient.put(params).promise();
         statusCode = 201;
-        responseBody = JSON.stringify({ 'shortUrlSlug': shortUrlSlug });
+        responseBody = shortUrlSlug;
       } catch (err) {
         statusCode = 403;
         responseBody = 'Unable to shorten URL';
