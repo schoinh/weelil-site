@@ -17,7 +17,8 @@ $(() => {
       method: 'post',
       body: JSON.stringify(params),
       })
-      .then(res => console.log(res));
+      .then(res => res.json())
+      .then(json => console.log(json));
 
     $('form')[0].reset();
   })
