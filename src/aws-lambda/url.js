@@ -4,8 +4,8 @@ const crypto = require('crypto');
 
 exports.handler = async (event) => {
   let params = {};
-  let responseBody = '';
   let statusCode = 0;
+  let responseBody = '';
   
   /*
   createEvent = {
@@ -30,12 +30,12 @@ exports.handler = async (event) => {
         }
       }
       try {
-        const data = await documentClient.put(params).promise();
-        responseBody = JSON.stringify(data); // FIXME: data should contain something
+        await documentClient.put(params).promise();
         statusCode = 201;
+        responseBody = params.Item.shortUrlSlug;
       } catch (err) {
-        responseBody = 'Unable to shorten URL';
         statusCode = 403;
+        responseBody = 'Unable to shorten URL';
       }
       break;
 
@@ -48,17 +48,17 @@ exports.handler = async (event) => {
       }
       try {
         const data = await documentClient.get(params).promise();
-        responseBody = data.Item.longUrl;
         statusCode = 200;
+        responseBody = data.Item.longUrl;
       } catch (err) {
-        responseBody = 'Unable to retrieve original URL';
         statusCode = 404;
+        responseBody = 'Unable to retrieve original URL';
       }
       break;
 
     default:
-      responseBody = 'Invalid operation'
       statusCode = 400;
+      responseBody = 'Invalid operation'
   }
 
   const response = {
