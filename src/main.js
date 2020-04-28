@@ -4,23 +4,24 @@ import $ from 'jquery';
 const fetch = require('node-fetch');
 
 $(() => {
-  $('#shorten-url').submit(event => {
+  $('#shorten-url').submit(async event => {
     event.preventDefault(); // NOTE: need this?
+    $('#result-block').slideUp();
+
     const userInput = normalize($('#user-input').val());
-    
     const params = {
       'operation': 'create',
       'longUrl': userInput
     };
 
-    fetch('https://9h1dsm837f.execute-api.us-west-2.amazonaws.com/url/url', {
+    const res = await fetch('https://9h1dsm837f.execute-api.us-west-2.amazonaws.com/url/url', {
       method: 'post',
       body: JSON.stringify(params),
-      })
-      .then(res => res.text())
-      .then(slug => console.log(slug));
+    });
+    const slug = await res.text();
 
-    $('form')[0].reset();
+    $('#slug').text(slug);
+    $('#result-block').slideDown();
   })
 })
 

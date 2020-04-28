@@ -3,7 +3,7 @@ body {
 }
 
 .container {
-  margin-top: 5rem;
+  margin-top: 3rem;
   text-align: center;
 }
 
@@ -54,11 +54,26 @@ button {
   color: #537791 !important;
   background-color: #c1c0b9 !important;
   font-family: menlo;
-  width: 10em;
+  width: 8em;
 }
 
 button:hover {
   background-color: #a7a7a7 !important;
+}
+
+#result-block {
+  display: none;
+  margin-top: 2rem;
+}
+
+#new-url {
+  font-size: 2em;
+  font-family: menlo;
+  color: #7c0724;
+  background-color: #f7f6e7;
+  border: 1px solid #d4a996;
+  border-radius: 0.3em;
+  padding: 1em;
 }
 
 #github-logo {
