@@ -1,6 +1,6 @@
 const AWS = require('aws-sdk');
 const documentClient = new AWS.DynamoDB.DocumentClient();
-// const crypto = require('crypto');
+const crypto = require('crypto');
 
 exports.handler = async (event) => {
   let params = {};
@@ -25,8 +25,7 @@ exports.handler = async (event) => {
       params = {
         TableName: 'urls',
         Item: {
-          // shortUrlSlug: crypto.randomBytes(6).toString('hex');
-          shortUrlSlug: '54321',
+          shortUrlSlug: crypto.randomBytes(3).toString('hex'),
           longUrl: event.longUrl, // TODO: Clean up https:// or http:// and/or www. in frontend
         }
       }
