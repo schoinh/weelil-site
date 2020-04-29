@@ -2,6 +2,32 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 import $ from 'jquery';
 const fetch = require('node-fetch');
+const crossroads = require('crossroads');
+
+crossroads.addRoute('{slugPath}', async slugPath => {
+  const getParams = {
+    'operation': 'read',
+    'shortUrlSlug': slugPath
+  }
+  const getRes = await fetch('https://9h1dsm837f.execute-api.us-west-2.amazonaws.com/url/url', {
+    method: 'post',
+    body: JSON.stringify(getParams)
+  });
+  const originalUrl = await getRes.text();
+
+  console.log(originalUrl);
+  window.location.replace('https://'+ originalUrl);
+})
+
+//Listen to hash changes
+window.addEventListener('popstate', function() {
+  let url = window.location.href;
+  let toParse = url.split('/').pop();
+  crossroads.parse(toParse);
+});
+
+// trigger hashchange on first page load
+window.dispatchEvent(new CustomEvent('popstate'));
 
 $(() => {
   $('#shorten-url').submit(async event => {

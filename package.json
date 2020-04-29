@@ -20,6 +20,7 @@
   "homepage": "https://github.com/schoinh/weelil-site#readme",
   "dependencies": {
     "bootstrap": "^4.4.1",
+    "crossroads": "^0.12.2",
     "jquery": "^3.5.0",
     "node-fetch": "^2.6.0",
     "popper.js": "^1.16.1"
