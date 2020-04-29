@@ -34,7 +34,7 @@ const normalize = input => {
   return noHttp[0].split('www.').join('');
 }
 
-// Take a slug like '123abc' and reroute user to original URL
+// Router for redirecting user to original URL
 crossroads.addRoute('{slugPath}', async slugPath => {
   const getParams = {
     'operation': 'read',
@@ -49,7 +49,7 @@ crossroads.addRoute('{slugPath}', async slugPath => {
   window.location.replace('https://'+ originalUrl);
 })
 
-// What happens when 'redirect' is triggered 
+// Call router when 'redirect' is triggered 
 window.addEventListener('redirect', function() {
   let url = window.location.href;
   let path = url.split('/').pop().slice(1);
