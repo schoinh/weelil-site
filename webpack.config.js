@@ -8,11 +8,11 @@ module.exports = {
   entry: './src/main.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'docs')
+    path: path.resolve(__dirname, 'dist')
   },
   devtool: 'eval-source-map',
   devServer: {
-    contentBase: './docs'
+    contentBase: './dist'
   },
   plugins: [
     new UglifyJsPlugin({ sourceMap: true }),
