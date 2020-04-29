@@ -4,33 +4,10 @@ import $ from 'jquery';
 const fetch = require('node-fetch');
 const crossroads = require('crossroads');
 
-crossroads.addRoute('{slugPath}', async slugPath => {
-  const getParams = {
-    'operation': 'read',
-    'shortUrlSlug': slugPath.slice(1)
-  }
-  const getRes = await fetch('https://9h1dsm837f.execute-api.us-west-2.amazonaws.com/url/url', {
-    method: 'post',
-    body: JSON.stringify(getParams)
-  });
-  const originalUrl = await getRes.text();
-
-  window.location.replace('https://'+ originalUrl);
-})
-
-//Listen to hash changes
-window.addEventListener('popstate', function() {
-  let url = window.location.href;
-  let toParse = url.split('/').pop();
-  crossroads.parse(toParse);
-});
-
-// trigger hashchange on first page load
-window.dispatchEvent(new CustomEvent('popstate'));
-
+// UI for shortening URLs
 $(() => {
   $('#shorten-url').submit(async event => {
-    event.preventDefault(); // NOTE: need this?
+    event.preventDefault();
     $('#result-block').slideUp();
 
     const userInput = normalize($('#user-input').val());
@@ -43,16 +20,41 @@ $(() => {
       method: 'post',
       body: JSON.stringify(params),
     });
-    const slug = await res.text();
+    const newSlug = await res.text();
 
-    $('#slug').text(slug);
+    $('#slug').text(newSlug);
     $('#result-block').slideDown();
   })
 })
 
-// Removes 'https://', 'http://', and/or 'www.'
+// Remove 'https://', 'http://', and/or 'www.' from input
 const normalize = input => {
   let noHttp = input.split('//');
   if (noHttp.length > 1) noHttp.shift();
   return noHttp[0].split('www.').join('');
 }
+
+// Take a slug like '123abc' and reroute user to original URL
+crossroads.addRoute('{slugPath}', async slugPath => {
+  const getParams = {
+    'operation': 'read',
+    'shortUrlSlug': slugPath
+  }
+  const getRes = await fetch('https://9h1dsm837f.execute-api.us-west-2.amazonaws.com/url/url', {
+    method: 'post',
+    body: JSON.stringify(getParams)
+  });
+  const originalUrl = await getRes.text();
+
+  window.location.replace('https://'+ originalUrl);
+})
+
+// What happens when 'redirect' is triggered 
+window.addEventListener('redirect', function() {
+  let url = window.location.href;
+  let path = url.split('/').pop().slice(1);
+  crossroads.parse(path);
+});
+
+// Trigger redirect on page load
+window.dispatchEvent(new Event('redirect'));
