@@ -7,7 +7,7 @@ const crossroads = require('crossroads');
 crossroads.addRoute('{slugPath}', async slugPath => {
   const getParams = {
     'operation': 'read',
-    'shortUrlSlug': slugPath
+    'shortUrlSlug': slugPath.slice(1)
   }
   const getRes = await fetch('https://9h1dsm837f.execute-api.us-west-2.amazonaws.com/url/url', {
     method: 'post',
@@ -15,7 +15,6 @@ crossroads.addRoute('{slugPath}', async slugPath => {
   });
   const originalUrl = await getRes.text();
 
-  console.log(originalUrl);
   window.location.replace('https://'+ originalUrl);
 })
 
