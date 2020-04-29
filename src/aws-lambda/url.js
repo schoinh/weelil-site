@@ -7,21 +7,8 @@ exports.handler = async (event) => {
   let statusCode = 0;
   let responseBody = '';
   const body = JSON.parse(event.body);
-  const { operation } = body;
   
-  /*
-  createEvent = {
-    'operation': 'create',
-    'longUrl': 'nahyungchoi.com'
-  }
-
-  readEvent = {
-    'operation': 'read',
-    'shortUrlSlug': '54321'
-  }
-  */
-
-  switch (operation) {
+  switch (body.operation) {
     case 'create':
       // TODO: First check if slug already exists
       let shortUrlSlug = crypto.randomBytes(3).toString('hex'); 
@@ -29,7 +16,7 @@ exports.handler = async (event) => {
         TableName: 'urls',
         Item: {
           shortUrlSlug: shortUrlSlug,
-          longUrl: body.longUrl, // TODO: Clean up https:// or http:// and/or www. in frontend
+          longUrl: body.longUrl,
         }
       }
       try {
