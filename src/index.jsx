@@ -6,10 +6,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
-// let unsubscribe = store.subscribe(() =>
-//   console.log(store.getState())
-// );
-
 const render = (Component) => {
   ReactDOM.render(
     <AppContainer>

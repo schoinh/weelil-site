@@ -1,6 +1,5 @@
 const fetch = require('node-fetch');
 
-// UI for shortening URLs
 export const shortenUrl = async rawInput => {
   const userInput = normalize(rawInput);
   const params = {
@@ -35,13 +34,3 @@ export const getOriginalUrl = async slug => {
   const originalUrl = await res.text();
   return originalUrl;
 };
-
-// Call router when 'redirect' is triggered 
-// window.addEventListener('redirect', function() {
-//   let url = window.location.href;
-//   let path = url.split('/').pop().slice(1);
-//   crossroads.parse(path);
-// });
-
-// Trigger redirect on page load
-// window.dispatchEvent(new Event('redirect'));

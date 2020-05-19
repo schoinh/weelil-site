@@ -4,12 +4,11 @@ import Error404 from './Error404';
 import Main from './Main';
 import { getOriginalUrl } from '../apiCalls';
 
-function Redirect() {
+async function Redirect() {
   let { slug } = useParams();
-  // const originalUrl = await getOriginalUrl(slug);
-  // window.location.href = ('http://'+ originalUrl);
-  // return null;
-  return (<div>{slug}</div>)
+  const originalUrl = await getOriginalUrl(slug);
+  window.location.href = ('http://'+ originalUrl);
+  return null;
 }
 
 function App() {
@@ -17,7 +16,7 @@ function App() {
     <div>
       <Switch>
         <Route exact path='/' component={Main} />
-        <Route path='/:slug' children={<Redirect/>} />
+        <Route path='/:slug' component={Redirect}/>
         <Route component={Error404} />
       </Switch>
     </div>
