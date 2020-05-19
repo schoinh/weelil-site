@@ -1,5 +1,5 @@
 import './Main.css';
-
+import githubLogo from '../images/GitHub_Logo.png';
 import React from 'react';
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form';
@@ -16,7 +16,7 @@ function Main() {
         <span className='url-line'>http://<span className='url' id='long-url'>www.reallylongwebsiteurl.com/itsnotoveryet/really/167345efadffa</span></span><br/>
         ...and make it little.<br/>
         <span className='url-line'>http://<span className='url' id='short-url'>weelil.site/#abc123</span></span>
-      </p>;
+      </p>
       <Form>
         <Form.Row>
           <Col md={10}>
@@ -31,7 +31,7 @@ function Main() {
         <span id='new-url'>weelil.site/#<span id='slug'></span></span>
       </div>
       <div id='github'>
-        Weelil Site on <a href='http://github.com/schoinh/weelil-site' target='_blank'><img id='github-logo' src='https://github.githubassets.com/images/modules/logos_page/GitHub-Logo.png'/></a>
+        Weelil Site on <a href='http://github.com/schoinh/weelil-site' target='_blank'><img id='github-logo' src={githubLogo}/></a>
       </div>
     </Container>
   )
