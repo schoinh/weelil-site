@@ -1,12 +1,25 @@
 #result-block {
   margin-top: 2rem;
-}
-
-#new-url {
   font-size: 2em;
   font-family: menlo;
   color: #537791;
   background-color: #f7f6e7;
   border-radius: 0.3em;
   padding: 1em;
+}
+
+#copied-result-block {
+  margin-top: 2rem;
+  font-size: 2em;
+  font-family: menlo;
+  color: #537791;
+  background-color: #b4ecb4;
+  border-radius: 0.3em;
+  padding: 1em;
+}
+
+#copy {
+  margin-left: 1em;
+  padding-bottom: .2em;
+  cursor: pointer;
 }

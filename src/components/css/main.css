@@ -46,6 +46,10 @@ input {
   font-family: menlo !important;
 }
 
+.form-row {
+  margin-bottom: 2em;
+}
+
 button {
   color: #537791 !important;
   background-color: #c1c0b9 !important;
