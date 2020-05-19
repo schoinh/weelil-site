@@ -58,20 +58,6 @@ button:hover {
   background-color: #a7a7a7 !important;
 }
 
-#result-block {
-  display: none;
-  margin-top: 2rem;
-}
-
-#new-url {
-  font-size: 2em;
-  font-family: menlo;
-  color: #537791;
-  background-color: #f7f6e7;
-  border-radius: 0.3em;
-  padding: 1em;
-}
-
 #github-logo {
   width: 60px;
   margin-top: 0.5em;
