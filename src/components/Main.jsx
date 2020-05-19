@@ -27,8 +27,11 @@ class Main extends React.Component {
   }
 
   async handleButtonClick() {
-    const output = await shortenUrl(this.state.input);
-    this.setState({ outputSlug: output, isOutputVisible: true });
+    this.setState({ isOutputVisible: false });
+    if (this.state.input) {
+      const output = await shortenUrl(this.state.input);
+      this.setState({ outputSlug: output, isOutputVisible: true });
+    }
   }
 
   render() {
