@@ -1,43 +1,91 @@
-const path = require('path');
+const webpack = require('webpack');
+const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: './src/main.js',
+  entry: [
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server',
+    resolve(__dirname, 'src', 'index.jsx')
+  ],
+
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: 'app.bundle.js',
+    path: resolve(__dirname, 'dist'),
+    publicPath: '/'
   },
-  devtool: 'eval-source-map',
+
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom'
+    }
+  },
+
+  devtool: '#source-map',
+
   devServer: {
-    contentBase: './dist'
+    hot: true,
+    contentBase: resolve(__dirname, './dist'),
+    publicPath: '/'
   },
+
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({ sourceMap: true })
+    ]
+  },
+
   plugins: [
-    new UglifyJsPlugin({ sourceMap: true }),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Weelil Site',
-      template: './src/index.html',
-      inject: 'body'
+      template: 'template.ejs',
+      appMountId: 'react-app-root',
+      filename: resolve(__dirname, 'dist', 'index.html'),
     }),
-    new Dotenv()
   ],
+
   module: {
     rules: [
+      {
+        test: /\.jsx?$/,
+        enforce: 'pre',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        options: {
+          presets: [
+            ['@babel/preset-react']
+          ],
+          plugins: [
+            'react-hot-loader/babel'
+          ]
+        }
+      },
+      {
+        test: /\.(png|gif|jp(e*)g|svg)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 8000,
+            name: 'images/[hash]-[name].[ext]'
+          }
+        }
+      },
       {
         test: /\.css$/,
         use: [
           'style-loader',
           'css-loader'
-        ]
-      },
-      {
-        test: /\.js$/,
-        exclude: [
-          /node_modules/,
-          /spec/
         ]
       }
     ]
