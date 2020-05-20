@@ -9,7 +9,7 @@ import 'bootstrap/dist/js/bootstrap.js';
 const render = (Component) => {
   ReactDOM.render(
     <AppContainer>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
           <Component />
       </Router>
     </AppContainer>,
