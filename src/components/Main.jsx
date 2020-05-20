@@ -26,7 +26,8 @@ class Main extends React.Component {
     this.setState({ input: event.target.value });
   }
 
-  async handleButtonClick() {
+  async handleButtonClick(event) {
+    event.preventDefault();
     this.setState({ isOutputVisible: false });
     if (this.state.input) {
       const output = await shortenUrl(this.state.input);
@@ -44,7 +45,7 @@ class Main extends React.Component {
           ...and make it little.<br/>
           <span className='url-line'>http://<span className='url' id='short-url'>weelil.site/abc123</span></span>
         </p>
-        <Form>
+        <Form onSubmit={this.handleButtonClick}>
           <Form.Row>
             <Col md={10}>
               <Form.Control required
@@ -56,7 +57,7 @@ class Main extends React.Component {
               /><br/>
             </Col>
             <Col md={2}>
-              <Button size='lg' onClick={this.handleButtonClick}>Weelil It</Button>
+              <Button size='lg' type='submit'>Weelil It</Button>
             </Col>
           </Form.Row>
         </Form>
