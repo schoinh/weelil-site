@@ -1,4 +1,4 @@
-#result-block {
+.result-block {
   margin-top: 2rem;
   font-size: 2em;
   font-family: menlo;
@@ -8,12 +8,15 @@
   padding: 1em;
 }
 
-#copied-result-block {
+.result-block-copied {
   margin-top: 2rem;
   font-size: 2em;
   font-family: menlo;
   color: #537791;
-  background-color: #b4ecb4;
+  background-color: #f7f6e7;
+  border-color: #537791;
+  border-width: 3px;
+  border-style: dashed;
   border-radius: 0.3em;
   padding: 1em;
 }
